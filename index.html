@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sneak Creative</title>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <div class="hamburger hamburger--collapse-r" id="hamburger">
+      <div class="hamburger-box">
+        <div class="hamburger-inner"></div>
+      </div>
+    </div>
+    <header class="header" id="header">
+      <nav class="navbar" id="menu">
+        <a class="logo" href="#">
+          <figure>
+            <img src="./assets/icons/logo.svg" alt="logo" />
+          </figure>
+          <div class="logo__description">
+            <span class="logo__name">SNEAK</span>
+            <span class="logo__text">CREATIVE PORTFOLIO</span>
+          </div>
+        </a>
+        <ol class="navbar__list" id="navbar__list">
+          <li class="navbar__item navbar__item--active">All</li>
+          <li class="navbar__item">Brading</li>
+          <li class="navbar__item">Web</li>
+          <li class="navbar__item">Photography</li>
+          <li class="navbar__item">App</li>
+          <figure class="search" id="search">
+            <img class="search__icon" src="./assets/icons/search-icon.svg" alt="search" />
+            <input id="navbar__imput" class="navbar__imput" type="text" name="navbar__imput" placeholder="Search anything"/>
+          </figure>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero__description">
+        <h1 class="hero__title">EXPLORE BEYOND HORIZON</h1>
+        <p class="hero__text">
+          Magna mundi referrentur que, no reburn dignissim qui. Per quodsi
+          accusata id, agam labores
+        </p>
+        <a class="hero__link" href="https://titamedia.com/" target="__black"
+          >VIEW OUR WORK</a
+        >
+      </div>
+    </section>
+
+    <main class="main">
+      <div class="display-icons">
+        <img
+          src="./assets/icons/block-icon.svg"
+          alt="grid-icon"
+          id="grid-icon"
+          class="display-icons__grid-icon"
+        />
+        <img
+          src="./assets/icons/column-icon.svg"
+          alt="list-icon"
+          id="list-icon"
+        />
+      </div>
+      <nav>
+        <ol class="navbar--main">
+          <li class="navbar__item navbar__item--active">All</li>
+          <li class="navbar__item">Brading</li>
+          <li class="navbar__item">Web</li>
+          <li class="navbar__item">Photography</li>
+          <li class="navbar__item">App</li>
+        </ol>
+      </nav>
+      <article id="gallery" class="gallery">
+        <div id="first-column"></div>
+        <div id="second-column"></div>
+        <div id="third-column"></div>
+      </article>
+      <button class="show-more" id="show-more">Show Me More</button>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">
+        &copy; 2021 - <span class="footer__brand-name">Sneak</span> All Right
+        Reserved
+      </p>
+      <ul class="social-media" id="social-media">
+        <li>
+          <a href="https://titamedia.com/" target="__black">
+            <img
+              class="social-media__item"
+              src="./assets/icons/facebook.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <a href="https://titamedia.com/" target="__black">
+          <img
+            class="social-media__item"
+            src="./assets/icons/twitter.svg"
+            alt=""
+          />
+        </a>
+        <li>
+          <a href="https://titamedia.com/" target="__black">
+            <img
+              class="social-media__item"
+              src="./assets/icons/dribble.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <li>
+          <a href="https://titamedia.com/" target="__black">
+            <img
+              class="social-media__item"
+              src="./assets/icons/google.svg"
+              alt=""
+            />
+          </a>
+        </li>
+        <li>
+          <a href="https://titamedia.com/" target="__black">
+            <img
+              class="social-media__item"
+              src="./assets/icons/youtube.svg"
+              alt=""
+            />
+          </a>
+        </li>
+      </ul>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

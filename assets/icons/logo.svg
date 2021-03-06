@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="36" viewBox="0 0 33 36">
+  <g id="Group_26" data-name="Group 26" transform="translate(-3105 -3570)">
+    <g id="Group_24" data-name="Group 24" transform="translate(-50 1)">
+      <g id="Polygon_8" data-name="Polygon 8" transform="translate(3180.5 3573.5) rotate(90)" fill="none">
+        <path d="M11.563,0,23.126,20H0Z" stroke="none"/>
+        <path d="M 11.563232421875 1.997896194458008 L 1.733270645141602 19 L 21.3931941986084 19 L 11.563232421875 1.997896194458008 M 11.563232421875 0 L 23.12646293640137 20 L 1.9073486328125e-06 20 L 11.563232421875 0 Z" stroke="none" fill="#161f32"/>
+      </g>
+      <g id="Polygon_9" data-name="Polygon 9" transform="translate(3162.5 3596.626) rotate(-90)" fill="none">
+        <path d="M11.563,0,23.126,20H0Z" stroke="none"/>
+        <path d="M 11.563232421875 1.997896194458008 L 1.733270645141602 19 L 21.3931941986084 19 L 11.563232421875 1.997896194458008 M 11.563232421875 0 L 23.12646293640137 20 L 1.9073486328125e-06 20 L 11.563232421875 0 Z" stroke="none" fill="#161f32"/>
+      </g>
+    </g>
+    <g id="Group_25" data-name="Group 25" transform="translate(-7 -7)">
+      <path id="Polygon_7" data-name="Polygon 7" d="M16.5,0,33,28H0Z" transform="translate(3145 3613) rotate(180)" fill="#ff5773"/>
+      <g id="Polygon_10" data-name="Polygon 10" transform="translate(3112 3577)" fill="none">
+        <path d="M16.5,0,33,28H0Z" stroke="none"/>
+        <path d="M 16.5 1.969697952270508 L 1.75 27 L 31.25 27 L 16.5 1.969697952270508 M 16.5 0 L 33 28 L 0 28 L 16.5 0 Z" stroke="none" fill="#161f32"/>
+      </g>
+    </g>
+  </g>
+</svg>

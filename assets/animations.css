@@ -1,5 +1,5 @@
 .fade-in {
-  animation: fadeInAnimation ease 2s;
+  animation: fadeInAnimation 2s ease-in-out;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }

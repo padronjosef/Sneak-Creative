@@ -24,7 +24,6 @@ let page = 1;
 // variable for search topic
 let topic = "all";
 
-
 // fade in animation to make everything smoother
 const fadeInAnimation = () => {
   gallery.classList.add("fade-in");
@@ -43,6 +42,7 @@ const toggleMobileMenu = () => {
 
 const closeMobileMenu = () => {
   if (header.classList.contains("header--active"))
+    hamburger.classList.toggle("is-active");
     header.classList.remove("header--active");
 };
 

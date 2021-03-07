@@ -18,10 +18,14 @@ const showMore = document.getElementById("show-more");
 const searchIcon = document.getElementById("search__icon");
 const searchImput = document.getElementById("search__imput");
 
+// variable for pagination
 let page = 1;
+
+// variable for search topic
 let topic = "all";
 
 
+// fade in animation to make everything smoother
 const fadeInAnimation = () => {
   gallery.classList.add("fade-in");
   setTimeout(() => {
@@ -29,6 +33,7 @@ const fadeInAnimation = () => {
   }, 2000);
 };
 
+// Mobile menu logic
 const toggleMobileMenu = () => {
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("is-active");
@@ -41,16 +46,7 @@ const closeMobileMenu = () => {
     header.classList.remove("header--active");
 };
 
-const animateMenuButtons = (e) => {
-  let itemActive = document.getElementsByClassName("navbar__link--active");
-
-  itemActive[0].className = itemActive[0].className.replace(
-    "navbar__link--active",
-    "navbar__link"
-  );
-  e.target.className = "navbar__link--active";
-};
-
+// navbar logic
 const activeGalleryButtons = () => {
   for (let i = 0; i < navBarLink.length; i++) {
     navBarLink[i].addEventListener("click", (e) => {
@@ -69,22 +65,47 @@ const activeHeaderButtons = () => {
   }
 };
 
+const animateMenuButtons = (e) => {
+  let itemActive = document.getElementsByClassName("navbar__link--active");
+
+  itemActive[0].className = itemActive[0].className.replace(
+    "navbar__link--active",
+    "navbar__link"
+  );
+  e.target.className = "navbar__link--active";
+};
+
 const searchByMenuButtons = (res) => {
   topic = res.target.innerText;
   page = 0;
   page++;
   deleteImgs();
-  featchImgsFromAPI();
+  fetchDataFromApi();
 };
 
+// search imput logic
+const scrollToGallery = () => (document.location.href = "#gallery");
 
-const deleteImgs = () => {
-  let img = document.getElementsByClassName("gallery__link");
-  while (img.length > 0) {
-    img[0].parentNode.removeChild(img[0]);
-  }
+const searchByImputButton = () => {
+  searchImput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      topic = e.target.value;
+      page = 0;
+      deleteImgs();
+      fetchDataFromApi();
+      closeMobileMenu();
+      scrollToGallery();
+    }
+  });
 };
 
+const toggleSearchIcon = () => {
+  searchIcon.addEventListener("click", () =>
+    searchImput.classList.toggle("search__imput--active")
+  );
+};
+
+// gallery views logic
 const activeGridView = () => {
   gridView.addEventListener("click", () => {
     if (gallery.classList.contains("gallery--inline"))
@@ -101,6 +122,7 @@ const activeListView = () => {
   });
 };
 
+// gallery logic
 const renderImgs = (
   res,
   photoInfo,
@@ -122,7 +144,7 @@ const renderImgs = (
 
   link.appendChild(photo);
 
-  let dataIndex = res.data.results.indexOf(photoInfo);
+  let dataIndex = res.results.indexOf(photoInfo);
 
   if (dataIndex % 3 == 0) firstColumn.appendChild(link);
   else if (dataIndex % 2 == 0) secondColumn.appendChild(link);
@@ -145,13 +167,22 @@ const renderNotFound = () => {
   gallery.classList.add("gallery--inline");
 };
 
+const deleteImgs = () => {
+  let img = document.getElementsByClassName("gallery__link");
+  while (img.length > 0) {
+    img[0].parentNode.removeChild(img[0]);
+  }
+};
+
 const ImgOrganizer = (res) => {
   const firstColumn = document.getElementById("first-column");
   const secondColumn = document.getElementById("second-column");
   const thirdColumn = document.getElementById("third-column");
   const fragment = document.createDocumentFragment();
 
-  for (const photoInfo of res.data.results.slice(0, 9))
+  fadeInAnimation();
+
+  for (const photoInfo of res.results.slice(0, 9))
     renderImgs(
       res,
       photoInfo,
@@ -161,55 +192,43 @@ const ImgOrganizer = (res) => {
       fragment
     );
 
-  if (res.data.results.length == 0) renderNotFound();
-
-  fadeInAnimation();
+  if (res.results.length == 0) renderNotFound();
   page++;
 };
 
-const featchImgsFromAPI = () => {
+const fetchData = (url) => {
+  return new Promise((resolve, reject) => {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState === 4) {
+        xhttp.status === 200
+          ? resolve(JSON.parse(xhttp.responseText))
+          : reject(new Error("Error", url));
+      }
+    };
+    xhttp.send();
+  });
+};
+
+const fetchDataFromApi = () => {
   const clientId = "&client_id=IfN-L8JK5qNpABCzhE_FKhkR1JOvLLnHqzfdWVoeC5c";
   let url = `https://api.unsplash.com/search/photos?page=${page}&query=${topic}${clientId}`;
-  axios({
-    url: url,
-  })
+  fetchData(url)
     .then(ImgOrganizer)
     .catch(console.log);
 };
 
-const scrollToMGallery = () => document.location.href = '#gallery'
-
-const searchByImputButton = () => {
-  searchImput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      topic = e.target.value;
-      page = 0;
-      deleteImgs();
-      featchImgsFromAPI();
-      closeMobileMenu();
-      scrollToMGallery()
-    }
-  });
-};
-
-const activeSearchIcon = () => {
-  searchIcon.addEventListener("click", () =>
-    searchImput.classList.toggle("search__imput--active")
-  );
-};
-
 const loadMoreImg = () => {
-  if (showMore) {
-    showMore.addEventListener("click", featchImgsFromAPI);
-  }
+  if (showMore) showMore.addEventListener("click", fetchDataFromApi);
 };
 
-featchImgsFromAPI();
 toggleMobileMenu();
 activeGalleryButtons();
 activeHeaderButtons();
 searchByImputButton();
-activeSearchIcon();
+toggleSearchIcon();
 activeGridView();
 activeListView();
+fetchDataFromApi();
 loadMoreImg();

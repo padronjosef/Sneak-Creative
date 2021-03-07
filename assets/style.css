@@ -3,10 +3,6 @@
 @import "./animations.css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial&display=swap");
 
-html {
-  scroll-behavior: smooth;
-}
-
 :root {
   --main-color: #fc758c;
   --secundary-color: #ff5672;
@@ -14,8 +10,9 @@ html {
   --gray1: #f6f6f6;
   --gray2: #dbe3e8;
   --gray3: #707070;
-  font-family: "Montserrat", sans-serif;
   --questrial: "Questrial", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .header {
@@ -47,6 +44,7 @@ html {
 
 .logo__img {
   width: 100%;
+  height: 100%;
 }
 
 .logo__description {
@@ -130,6 +128,7 @@ html {
 
 .search__imput:focus {
   background-color: var(--gray1);
+  border: 1px solid red;
 }
 
 .search__imput--active {
@@ -179,15 +178,15 @@ html {
 
 .hero__link {
   font-family: var(--questrial);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--main-color);
   background-color: var(--white);
-  padding: 11px 13px;
+  padding: 15px 50px;
   letter-spacing: 2px;
 }
 
 .main {
-  padding-top: 80px;
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -207,7 +206,7 @@ html {
 
 .gallery {
   max-width: 1200px;
-  margin: 2rem 2rem 80px;
+  margin: 0rem 2rem 80px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: "first-column second-column third-column";
@@ -309,7 +308,7 @@ html {
   }
 
   .gallery {
-    margin: 1rem 1rem 3rem;
+    margin: 0rem 1rem 3rem;
     grid-gap: .6rem;
   }
 

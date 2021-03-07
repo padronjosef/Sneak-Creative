@@ -31,6 +31,7 @@ const activeHambuger = () => {
 const navIconsSearch = (res) => {
   topic = res.target.innerText;
   page = 0;
+  page++;
   deleteImgs();
   loadImgs();
 };
@@ -40,23 +41,23 @@ const closeHeader = () => {
     header.classList.remove("header--active");
 };
 
-const activeGalleryButtons = ()=> {
+const activeGalleryButtons = () => {
   for (let i = 0; i < navBarLink.length; i++) {
     navBarLink[i].addEventListener("click", (e) => {
       classReplacer(e);
       navIconsSearch(e);
     });
   }
-}
+};
 
-const activeHeaderButtons = ()=> {
+const activeHeaderButtons = () => {
   for (let i = 0; i < navBarHeaderItems.length; i++) {
     navBarHeaderItems[i].addEventListener("click", (e) => {
       closeHeader();
       navIconsSearch(e);
     });
   }
-}
+};
 
 const classReplacer = (e) => {
   let itemActive = document.getElementsByClassName("navbar__link--active");
@@ -110,9 +111,10 @@ const renderImgs = (
   link.className = "gallery__link";
   link.href = photoInfo.links.html;
   link.target = "_blank";
+  link.rel = "rel='noreferrer'";
 
   const photo = document.createElement("IMG");
-  photo.src = photoInfo.urls.regular;
+  photo.src = photoInfo.urls.small;
   photo.alt = photoInfo.alt_description;
   photo.className = "gallery__img";
 
@@ -199,8 +201,8 @@ const loadMoreImg = () => {
 
 loadImgs();
 activeHambuger();
-activeGalleryButtons()
-activeHeaderButtons()
+activeGalleryButtons();
+activeHeaderButtons();
 doSearch();
 activeSearchIcon();
 activeGridView();

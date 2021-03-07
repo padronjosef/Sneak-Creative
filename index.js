@@ -43,7 +43,7 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   if (header.classList.contains("header--active"))
     hamburger.classList.toggle("is-active");
-    header.classList.remove("header--active");
+  header.classList.remove("header--active");
 };
 
 // navbar logic
@@ -91,6 +91,7 @@ const searchByImputButton = () => {
     if (e.key === "Enter") {
       topic = e.target.value;
       page = 0;
+      page++;
       deleteImgs();
       fetchDataFromApi();
       closeMobileMenu();
@@ -214,9 +215,7 @@ const fetchData = (url) => {
 const fetchDataFromApi = () => {
   const clientId = "&client_id=IfN-L8JK5qNpABCzhE_FKhkR1JOvLLnHqzfdWVoeC5c";
   let url = `https://api.unsplash.com/search/photos?page=${page}&query=${topic}${clientId}`;
-  fetchData(url)
-    .then(ImgOrganizer)
-    .catch(console.log);
+  fetchData(url).then(ImgOrganizer).catch(console.log);
 };
 
 const loadMoreImg = () => {

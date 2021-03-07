@@ -1,0 +1,46 @@
+@media only screen and (max-width: 1024px) {
+  .header {
+    height: 100vh !important;
+    left: 100vw;
+    transition: all 400ms ease-out;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  .header--active {
+    display: flex;
+    left: 0;
+    transition: all 400ms ease-out;
+  }
+
+  .navbar__list {
+    flex-direction: column;
+  }
+
+  .navbar {
+    justify-content: space-evenly !important;
+    flex-direction: column;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .gallery {
+    margin: 1rem 1rem 3rem !important;
+    grid-gap: .5rem !important;
+  }
+
+  .gallery__link {
+    margin: 0 !important;
+  }
+
+  .search {
+    margin-top: 3rem;
+    margin-bottom: 20vh;
+  }
+
+  .search__icon {
+    margin: 0 !important;
+  }
+}

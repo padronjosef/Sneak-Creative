@@ -21,45 +21,27 @@ const searchImput = document.getElementById("search__imput");
 let page = 1;
 let topic = "all";
 
-const activeHambuger = () => {
+
+const fadeInAnimation = () => {
+  gallery.classList.add("fade-in");
+  setTimeout(() => {
+    gallery.classList.remove("fade-in");
+  }, 2000);
+};
+
+const toggleMobileMenu = () => {
   hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("is-active");
     header.classList.toggle("header--active");
   });
 };
 
-const navIconsSearch = (res) => {
-  topic = res.target.innerText;
-  page = 0;
-  page++;
-  deleteImgs();
-  loadImgs();
-};
-
-const closeHeader = () => {
+const closeMobileMenu = () => {
   if (header.classList.contains("header--active"))
     header.classList.remove("header--active");
 };
 
-const activeGalleryButtons = () => {
-  for (let i = 0; i < navBarLink.length; i++) {
-    navBarLink[i].addEventListener("click", (e) => {
-      classReplacer(e);
-      navIconsSearch(e);
-    });
-  }
-};
-
-const activeHeaderButtons = () => {
-  for (let i = 0; i < navBarHeaderItems.length; i++) {
-    navBarHeaderItems[i].addEventListener("click", (e) => {
-      closeHeader();
-      navIconsSearch(e);
-    });
-  }
-};
-
-const classReplacer = (e) => {
+const animateMenuButtons = (e) => {
   let itemActive = document.getElementsByClassName("navbar__link--active");
 
   itemActive[0].className = itemActive[0].className.replace(
@@ -69,6 +51,33 @@ const classReplacer = (e) => {
   e.target.className = "navbar__link--active";
 };
 
+const activeGalleryButtons = () => {
+  for (let i = 0; i < navBarLink.length; i++) {
+    navBarLink[i].addEventListener("click", (e) => {
+      animateMenuButtons(e);
+      searchByMenuButtons(e);
+    });
+  }
+};
+
+const activeHeaderButtons = () => {
+  for (let i = 0; i < navBarHeaderItems.length; i++) {
+    navBarHeaderItems[i].addEventListener("click", (e) => {
+      closeMobileMenu();
+      searchByMenuButtons(e);
+    });
+  }
+};
+
+const searchByMenuButtons = (res) => {
+  topic = res.target.innerText;
+  page = 0;
+  page++;
+  deleteImgs();
+  featchImgsFromAPI();
+};
+
+
 const deleteImgs = () => {
   let img = document.getElementsByClassName("gallery__link");
   while (img.length > 0) {
@@ -76,18 +85,11 @@ const deleteImgs = () => {
   }
 };
 
-const galleryAnimation = () => {
-  gallery.classList.add("fade-in");
-  setTimeout(() => {
-    gallery.classList.remove("fade-in");
-  }, 2000);
-};
-
 const activeGridView = () => {
   gridView.addEventListener("click", () => {
     if (gallery.classList.contains("gallery--inline"))
       gallery.classList.remove("gallery--inline");
-    galleryAnimation();
+    fadeInAnimation();
   });
 };
 
@@ -95,7 +97,7 @@ const activeListView = () => {
   listView.addEventListener("click", () => {
     if (gallery.classList.contains("gallery--inline") == false)
       gallery.classList.add("gallery--inline");
-    galleryAnimation();
+    fadeInAnimation();
   });
 };
 
@@ -129,7 +131,7 @@ const renderImgs = (
   gallery.appendChild(fragment);
 };
 
-const showNotFound = () => {
+const renderNotFound = () => {
   const link = document.createElement("FIGURE");
   link.className = "gallery__link";
 
@@ -159,13 +161,13 @@ const ImgOrganizer = (res) => {
       fragment
     );
 
-  if (res.data.results.length == 0) showNotFound();
+  if (res.data.results.length == 0) renderNotFound();
 
-  galleryAnimation();
+  fadeInAnimation();
   page++;
 };
 
-const loadImgs = () => {
+const featchImgsFromAPI = () => {
   const clientId = "&client_id=IfN-L8JK5qNpABCzhE_FKhkR1JOvLLnHqzfdWVoeC5c";
   let url = `https://api.unsplash.com/search/photos?page=${page}&query=${topic}${clientId}`;
   axios({
@@ -175,14 +177,17 @@ const loadImgs = () => {
     .catch(console.log);
 };
 
-const doSearch = () => {
+const scrollToMGallery = () => document.location.href = '#gallery'
+
+const searchByImputButton = () => {
   searchImput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       topic = e.target.value;
       page = 0;
       deleteImgs();
-      loadImgs();
-      closeHeader();
+      featchImgsFromAPI();
+      closeMobileMenu();
+      scrollToMGallery()
     }
   });
 };
@@ -195,15 +200,15 @@ const activeSearchIcon = () => {
 
 const loadMoreImg = () => {
   if (showMore) {
-    showMore.addEventListener("click", loadImgs);
+    showMore.addEventListener("click", featchImgsFromAPI);
   }
 };
 
-loadImgs();
-activeHambuger();
+featchImgsFromAPI();
+toggleMobileMenu();
 activeGalleryButtons();
 activeHeaderButtons();
-doSearch();
+searchByImputButton();
 activeSearchIcon();
 activeGridView();
 activeListView();
